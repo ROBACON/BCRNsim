@@ -1,0 +1,179 @@
+{
+    "default": {
+        "convert_to_time_unit": "h",
+        "figsize": [
+            2,
+            2
+        ],
+        "filename_type": [
+            "png",
+            "pdf"
+        ],
+        "logscale": "Y",
+        "no_grid": true,
+        "no_legend": true,
+        "no_title": false,
+        "output_dir": "",
+        "save_fig": true,
+        "statistics": "runs",
+        "ylim": [
+            1.0,
+            10000000000000.0
+        ]
+    },
+    "plots": {
+        "P0.1111111111111111_OD0.25_KTrue": {
+            "ON": true,
+            "external_data": [
+                {
+                    "field": "E3",
+                    "file": "../data/ReceiveKan/fig9i_ODcubic.csv",
+                    "species": [
+                        "E3"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "E3",
+                    "file": "../data/ReceiveKan/fig10_ODcubic.csv",
+                    "species": [
+                        "E3"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "E3",
+                    "file": "../data/ReceiveKan/fig12_ODcubic.csv",
+                    "species": [
+                        "E3"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "E7",
+                    "file": "../data/ReceiveKan/fig9i_ODcubic.csv",
+                    "species": [
+                        "E7"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "E7",
+                    "file": "../data/ReceiveKan/fig10_ODcubic.csv",
+                    "species": [
+                        "E7"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "E11",
+                    "file": "../data/ReceiveKan/fig9i_ODcubic.csv",
+                    "species": [
+                        "E11"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "E11",
+                    "file": "../data/ReceiveKan/fig10_ODcubic.csv",
+                    "species": [
+                        "E11"
+                    ],
+                    "with_file_prefix": true
+                },
+                {
+                    "field": "pfu1_OD0.25_KTrue",
+                    "file": "../data/ReceiveKan/data/fig9ii_phages.csv",
+                    "plot_type": "scatter",
+                    "species": [
+                        "pfu1_OD0.25_KTrue"
+                    ]
+                },
+                {
+                    "field": "pfu2_OD0.25_KTrue",
+                    "file": "../data/ReceiveKan/data/fig9ii_phages.csv",
+                    "plot_type": "scatter",
+                    "species": [
+                        "pfu2_OD0.25_KTrue"
+                    ]
+                },
+                {
+                    "field": "pfu3_OD0.25_KTrue",
+                    "file": "../data/ReceiveKan/data/fig9ii_phages.csv",
+                    "plot_type": "scatter",
+                    "species": [
+                        "pfu3_OD0.25_KTrue"
+                    ]
+                }
+            ],
+            "species": [
+                "OD",
+                "Ecoli infected",
+                "Phages"
+            ],
+            "statistics": "runs",
+            "styles": {
+                "Ecoli infected": {
+                    "color": "STYLE:RCV_INFECTED",
+                    "linestyle": "--",
+                    "name": "rcv. infected (sim.)",
+                    "plot_type": "line"
+                },
+                "Ecoli nonblocked": {
+                    "color": "orange",
+                    "linestyle": "--",
+                    "plot_type": "line"
+                },
+                "Ecoli not antibiotic": {
+                    "color": "black",
+                    "linestyle": "--",
+                    "plot_type": "line"
+                },
+                "Ecoli old": {
+                    "color": "yellow",
+                    "linestyle": "--",
+                    "plot_type": "line"
+                },
+                "OD": {
+                    "color": "STYLE:ECOLI_PINK",
+                    "linestyle": "-",
+                    "name": "rcv. (sim.)",
+                    "plot_type": "line"
+                },
+                "Phages": {
+                    "color": "STYLE:PHAGE_GREEN",
+                    "linestyle": "-",
+                    "name": "$\\phi.$ (sim.)",
+                    "plot_type": "line"
+                },
+                "default": {
+                    "color": "STYLE:ECOLI_PINK_LIGHT",
+                    "dotsize": 1,
+                    "marker": "o",
+                    "plot_type": "scatter"
+                },
+                "pfu1_OD0.25_KTrue": {
+                    "color": "STYLE:PHAGE_GREEN_LIGHT",
+                    "dotsize": 1,
+                    "marker": "o",
+                    "name": "$\\phi$ (PFU, exp.)"
+                },
+                "pfu2_OD0.25_KTrue": {
+                    "color": "STYLE:PHAGE_GREEN_LIGHT",
+                    "dotsize": 1,
+                    "marker": "o",
+                    "name": "$\\phi$ (PFU, exp.)"
+                },
+                "pfu3_OD0.25_KTrue": {
+                    "color": "STYLE:PHAGE_GREEN_LIGHT",
+                    "dotsize": 1,
+                    "marker": "o",
+                    "name": "$\\phi$ (PFU, exp.)"
+                }
+            },
+            "title": "$\\mathrm{OD}_{600} = 0.25$, phage dilution $\\mathrm{factor} = 0.111111$",
+            "xlabel": "time (h)",
+            "ylabel": "counts per ml"
+        }
+    }
+}

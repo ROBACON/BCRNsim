@@ -1,0 +1,95 @@
+PARAM_NAME	VALUE	DTYPE	(COMMENTS)
+
+# GENERAL
+model				Recipient_Kan			str
+solver				copasi				str
+duration			1320				float	(1320, amount of time to simulate) 1320 for 1st plate reader data, 795 for 2nd
+volume_ml			0.2				float
+debug				True				bool
+verbose				True				bool
+
+species_min			-1				float	(-1 to ignore)
+max_solver_failures		1				int
+
+# COPASI
+simulation_method		deterministic			str	(deterministic, 'Stochastic','stochastic','DirectMethod','TauLeap' see README.)
+# -- STOCHASTIC
+repetitions			1				int	(5)
+confidence			.80				float	(confidence for confidence intervals)
+hull_CI				True				bool	(use min/max as hulls)
+skewed_CI			True				bool	(use a skew-adjusted T-test for confidence intervals)
+stats_stepsize			15				int
+# -- DETAILS
+cps_dir				cps/				str
+relative_tolerance		1e-8				str	(1e-8, decrease for slower, but more accurate simulations)
+absolute_tolerance		1e-10				str	(1e-10, decrease for slower, but more accurate simulations)
+max_internal_steps		2e8				int	(2e9, for stochastic, see copasi manual)
+max_internal_step_size		0				float	(for stochastic, see copasi manual, 0 means no limit)
+
+# OUTPUT
+output_dir			output/Recipient_Kan/		str
+output_file			S4_SIM_SEVERAL_KFalse.tsd	str
+plot				True				bool
+save_data			True				bool
+sim_stepsize			15				float	(how often to plot, # datapoints = duration/stepsize) (stoch 1e-2)
+print_stepsize			15				float
+plot_json			params/Recipient_Kan-plot.json	str	(for plotting, to ignore use None)
+
+# EPA MODEL: INIT CONCENTRATIONS
+# -----------------------------------------------------------------------------------------
+stop_simulation_at_resources_consumed	1e15						float
+init_ecoli			8174758							int
+init_ratio_old			0.1							float	()
+init_phages			90625							eval	(phages/ml)
+init_antibiotics#APhage		100000000						eval	(1e8 if present)
+init_antibiotics#AReceiver	0							int	(0)
+init_antibiotics#ADonor		0							int	(0)
+init_glucose			27000000						eval	(3 * if Ktrue, 1 * if Kfalse)
+init_amino_acid			3e8							eval	()
+init_gp3			0							eval	(1e8 if present)
+# -----------------------------------------------------------------------------------------
+
+# -- E. COLI
+death_rate					1e-4		float	(1e-4)
+dup_rate					1/20		eval	(1/20, 1/dup_rate is expected minutes to duplicate for a single cell)
+amino_acid_penalty_factor			0.08		float	(0.08)
+
+# -- PREINFECTION
+pre_inf						True		bool
+pre_inf_duration				20		int
+pre_inf_freeze					True		bool
+
+# -- PHAGES
+inf_rate					10 * 3e-11		eval	(10 * 3e-11, fitted, infection rate)
+phage_decay_rate				0.074/(24*60)		eval	(from DOI: 10.1371/journal.pbio.0040193, Table 1)
+inf_factor_young				0.004			float	(0.004, factor to get infection rate of young cells, fitted)
+inf_factor_antibiotic				0.3			float	(0.3, factor to get infection rate of antibiotic cells)
+young_to_old_rate				1/(4*60)     		eval	(rate for a cell to transition from young to old)
+uninf_rate					0			float	(0)
+num_pili					1			int	(1)
+clogging_infection				False			bool	(False, if True, number of free pili goes in infection rate)
+new_pili_on_duplication				True			bool	(True, if True, new free pili are grown when duplicating)
+plasmid_penalty_factor				0.0			float	(0.0, penalty factor to growth rate in early infection)
+early_to_late_inf_rate				1/(3*60)		eval	(3h expected)
+plasmid_penalty_factor_late			0.5			float	(0.5, penalty factor to growth rate in late infection)
+
+# -- ANTIBIOTICS
+antibiotic_uptake_rate#AReceiver		0.15 * 1/1e8		eval	(0.15 * 1/1e8)
+antibiotic_uptake_rate#APhage			0.15 * 1/1e8		eval	(0.15 * 1/1e8)
+antibiotic_uptake_rate#ADonor			0.15 * 1/1e8		eval	(0.15 * 1/1e8)
+# - static death
+antibiotic_death_rate				1 * 1e-4		eval	(1 * 1e-4)
+# - dynamic death
+antibiotic_death_on_duplication_prob#AReceiver	0.1			float	(0.1)
+antibiotic_death_on_duplication_prob#APhage	0.05			float	(0.05)
+antibiotic_birth_penalty_factor			1.0			float	(1.0)
+# - secondary
+antibiotic_spont_res				0			float	(0)
+antibiotic_slots				1			int	(1)
+antibiotic_threshold_slots			0			int	(0, all with > . slots taken has antibiotic death & birth rates)
+antibiotic_resistant_death_rate			1 * 1e-4		eval	(1 * 1e-4)
+antibiotic_resistant_birth_penalty_factor	1.0			float	(1.0)
+
+# -- GP3
+gp3_block_rate					5e5 * 10 * 3e-11	eval	(ATTENTION if using viscosity)
+gp3_unblock_rate				1/(5*60)		eval	(1/(5*60), expected 5h)

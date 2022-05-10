@@ -1,0 +1,37 @@
+{
+	"default":
+	{
+		"convert_to_time_unit": "h",
+	        "figsize": [
+	            2,
+	            2
+	        ],
+	        "filename_type": [
+	            "png",
+	            "pdf"
+	        ],
+	        "logscale": "Y",
+	        "no_grid": true,
+	        "no_legend": false,
+	        "no_title": false,
+	        "output_dir": "",
+	        "save_fig": true,
+	        "statistics": "runs",
+	        "ylim": [
+	            1e0,
+	            1e11
+	        ]
+	},
+	"plots": {
+		"Wildtype": {
+			"ON": true,
+			"species": ["Ecoli", "Phages", "gp3", "Ecoli infected"],
+			"plot_type": "line",
+			"external_data": [ 
+                        ],
+                        "styles": { "default": { "plot_type": "line",
+			                         "linestyle": "-" }
+			}
+		}
+	}
+} 

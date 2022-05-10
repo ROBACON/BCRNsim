@@ -1,0 +1,67 @@
+{
+	"default": {
+		"save_fig": true,
+		"output_dir": "",
+		"logscale": "Y",
+		"xlim": [4,16],
+		"xticks": [4,8,12,16],
+		"ylim": [1e0,1e12],
+		"figsize": [1.5,1.5],
+		"statistics": "runs",
+		"filename_type": ["pdf"],
+		"convert_to_time_unit": "h",
+		"no_legend": false,
+		"legend.bbox_to_anchor": [1, 1.0],
+		"no_title": true,
+		"no_grid": true
+	},
+	"plots": {
+		"Secretion": {
+			"ON": true,
+			"write_data_into": "Secretion.json",
+			"xlabel": "time (h)",
+			"ylabel": "counts mL$^{-1}$",
+			"species": ["P", "OD"],
+			"external_data": [ 
+				{  "file":"../data/secretion_rate/secretion_MG1655_factor_cubic.csv",
+				    "species": ["phage_cfu_1", "phage_cfu_2", "phage_cfu_3"] },
+				{  "file":"../data/secretion_rate/secretion_pfuvonverted_MG1655_factor_cubic.csv",
+				   "species": ["Ecoli_1", "Ecoli_2", "Ecoli_3"] }
+                        ],
+           		"styles": { "default": { "plot_type": "line",
+				                 "color": "red",
+				                 "linestyle": "-",
+				                 "dotsize": 2 },
+           			    "OD": { "name": "sender, sim.",
+           			    	    "color": "STYLE:SND_BLUE",
+           			            "linestyle": "-" },
+				    "P": { "name": "phage (CFU), sim.",
+					   "color": "STYLE:PHAGE_GREEN" },
+				    "Ecoli_1": { "name": "sender, exp.",
+				    	         "plot_type": "scatter",
+				    	         "marker": ".",
+					         "color": "STYLE:SND_BLUE_LIGHT" },
+				    "Ecoli_2": { "name": "__nolegend__",
+				    	         "plot_type": "scatter",
+				    	         "marker": ".",
+					         "color": "STYLE:SND_BLUE_LIGHT" },
+				    "Ecoli_3": { "name": "__nolegend__",
+				    	         "plot_type": "scatter",
+				    	         "marker": ".",
+					         "color": "STYLE:SND_BLUE_LIGHT" },
+				    "phage_cfu_1": { "name": "phage (CFU), exp.",
+				    	             "plot_type": "scatter",
+				    	             "marker": ".",
+					             "color": "black" },
+				    "phage_cfu_2": { "name": "__nolegend__",
+				    	             "plot_type": "scatter",
+				    	             "marker": ".",
+					             "color": "black" },
+				    "phage_cfu_3": { "name": "__nolegend__",
+				    	             "plot_type": "scatter",
+				    	             "marker": ".",
+					             "color": "black" }
+			}
+		}
+	}
+} 

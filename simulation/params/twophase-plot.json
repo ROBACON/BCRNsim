@@ -1,0 +1,25 @@
+{
+	"default": {
+		"save_fig": true,
+		"output_dir": "",
+		"no_grid": true,
+		"logscale": "Y",
+		"ylim": [1e6,1e10],
+		"figsize": [5,4],
+		"statistics": "runs"
+	},
+	"plots": {
+		"Two-phase model": {
+			"ON": true,
+			"xlabel": "time [min]",
+			"ylabel": "concentration [1/ml]",
+			"species": ["cell type A", "resource type 1", "resource type 2"],
+			"plot_type": "line",
+			"external_data": [],
+                        "styles": { "default": { "plot_type": "line",
+				                 "linestyle": "-",
+				                 "dotsize": 6 }
+				  }
+		}
+	}
+} 

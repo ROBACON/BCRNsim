@@ -1,0 +1,24 @@
+{
+	"default": {
+		"save_fig": true,
+		"output_dir": "",
+		"logscale": "Y",
+		"ylim": [1e6,1e9],
+		"figsize": [5,4],
+		"statistics": "runs"
+	},
+	"plots": {
+		"One-phase model": {
+			"ON": true,
+			"xlabel": "time [min]",
+			"ylabel": "concentration [1/ml]",
+			"species": ["cell type A", "resource type R"],
+			"plot_type": "line",
+			"external_data": [],
+                        "styles": { "default": { "plot_type": "line",
+				                 "linestyle": "-",
+				                 "dotsize": 6 }
+				  }
+		}
+	}
+} 

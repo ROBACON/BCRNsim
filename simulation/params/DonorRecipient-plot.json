@@ -1,0 +1,40 @@
+{
+	"default": {
+		"save_fig": true,
+		"output_dir": "",
+		"logscale": "Y",
+		"xlim": [0,10],
+		"ylim": [1e0,1e12],
+		"figsize": [1.5,1.5],
+		"statistics": "runs",
+		"filename_type": ["pdf"],
+		"convert_to_time_unit": "h",
+		"no_legend": false,
+		"legend.bbox_to_anchor": [-1.1, 1.0],
+		"no_title": true,
+		"no_grid": true
+	},
+	"plots": {
+		"DonorRecipient": {
+			"ON": true,
+			"xlabel": "time (h)",
+			"ylabel": "concentration ($\\mathrm{ml}^{-1}$)",
+			"species": ["Phages", "Donor_Ecoli", "Recipient_Ecoli"],
+			"external_data": [
+                        ],
+           		"styles": { "default": { "plot_type": "line",
+				                 "color": "red",
+				                 "linestyle": "-",
+				                 "dotsize": 2 },
+           			    "Donor_Ecoli": { "name": "snd (sim.)",
+           			    	    "color": "STYLE:SND_BLUE",
+           			            "linestyle": "-" },
+           			    "Recipient_Ecoli": { "name": "rcv (sim.)",
+           			    	    "color": "STYLE:BOTH_ORANGE_LIGHT",
+           			            "linestyle": "-" },
+				    "Phages": { "name": "phage (sim.)",
+					        "color": "STYLE:PHAGE_GREEN"}
+			}
+		}
+	}
+} 

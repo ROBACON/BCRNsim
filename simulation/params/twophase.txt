@@ -1,0 +1,45 @@
+PARAM_NAME	VALUE	DTYPE	(COMMENTS)
+
+# GENERAL
+model				twophase			str
+solver				copasi				str
+duration			300				float
+volume_ml			1.0				float
+debug				True				bool
+verbose				True				bool
+
+species_min			-1				float	(-1 to ignore)
+max_solver_failures		1				int
+
+# COPASI
+simulation_method		deterministic			str	(deterministic, 'Stochastic','stochastic','DirectMethod','TauLeap' see README.)
+# -- STOCHASTIC
+repetitions			3				int	(5)
+confidence			.80				float	(confidence for confidence intervals)
+hull_CI				True				bool	(use min/max as hulls)
+skewed_CI			True				bool	(use a skew-adjusted T-test for confidence intervals)
+stats_stepsize			15				int
+# -- DETAILS
+cps_dir				cps/				str
+relative_tolerance		1e-8				str	(1e-8, decrease for slower, but more accurate simulations)
+absolute_tolerance		1e-10				str	(1e-10, decrease for slower, but more accurate simulations)
+max_internal_steps		2e8				int	(2e9, for stochastic, see copasi manual)
+max_internal_step_size		0				float	(for stochastic, see copasi manual, 0 means no limit)
+
+# OUTPUT
+output_dir			output/twophase/		str
+output_file			TIMESTAMP.tsd			str
+plot				True				bool
+save_data			True				bool
+sim_stepsize			15				float	(how often to plot, # datapoints = duration/stepsize) (stoch 1e-2)
+print_stepsize			15				float
+plot_json			params/twophase-plot.json	str	(for plotting, to ignore use None)
+
+# -----------------------------------------------------------------------------------------
+init_cells			1e6							float
+init_res_1			1e8							float
+init_res_2			1e9							float
+# -----------------------------------------------------------------------------------------
+
+res_1_rate					1/20		eval
+res_2_rate					1/100		eval

@@ -1,0 +1,124 @@
+PARAM_NAME	VALUE	DTYPE	(COMMENTS)
+
+# GENERAL
+model					DonorRecipient					str
+solver					copasi						str
+duration				900						float	(1200, amount of time to simulate) 1320 for 1st plate reader data, 795 for 2nd
+volume_ml				1.0						float	(set in simulation file)
+debug					True						bool
+verbose					True						bool
+
+species_min				-1						float	(-1 to ignore)
+max_solver_failures			1						int
+
+# COPASI
+simulation_method			deterministic					str	(deterministic, 'Stochastic','stochastic','DirectMethod','TauLeap' see README.)
+# -- STOCHASTIC
+repetitions				20						int	(5)
+confidence				.80						float	(confidence for confidence intervals)
+hull_CI					True						bool	(use min/max as hulls)
+skewed_CI				True						bool	(use a skew-adjusted T-test for confidence intervals)
+stats_stepsize				15						int
+# -- DETAILS
+cps_dir					cps/						str
+relative_tolerance			1e-8						str	(1e-8, decrease for slower, but more accurate simulations)
+absolute_tolerance			1e-10						str	(1e-10, decrease for slower, but more accurate simulations)
+max_internal_steps			2e8						int	(2e9, for stochastic, see copasi manual)
+max_internal_step_size			0						float	(for stochastic, see copasi manual, 0 means no limit)
+
+# OUTPUT
+output_dir				output/DonorRecipient/				str
+output_file				TIMESTAMP.tsd					str
+plot					True						bool
+save_data				True						bool
+sim_stepsize				15						float	(how often to plot, # datapoints = duration/stepsize) (stoch 1e-2)
+print_stepsize				15						float
+plot_json				params/DonorRecipient-plot.json			str	(for plotting, to ignore use None)
+
+# INIT CONCENTRATIONS
+init_ecoli				0						int	(dummy, 0)
+init_antibiotics			0						int	(dummy, 0)
+init_phages				0						eval	(phages/ml)
+# -----------------------------------------------------------------------------------------
+stop_simulation_at_resources_consumed	1e15						float
+Donor.init_ecoli			1e4						int
+Recipient.init_ecoli			1000						int
+Recipient.init_ratio_old		0.1						float	()
+
+antibiotics_after_min			60						int
+init_antibiotics#ADonor			1e8						eval	(1e8)
+Recipient.init_antibiotics#APhage	1e8						eval	(1e8)
+Recipient.init_antibiotics#AReceiver	1e8						eval	(1e8) Kan on phages
+
+init_glucose				3 * 9e6						eval	()
+init_amino_acid				3e8						eval	()
+init_gp3				0						eval
+# -----------------------------------------------------------------------------------------
+
+# -- E. COLI
+death_rate							1e-4			float	(1e-4)
+
+Donor.dup_rate							1/40			eval	1/dup_rate is expected minutes to duplicate
+Donor.amino_acid_penalty_factor					0.60			float	
+
+Recipient.dup_rate						1/20			eval	1/dup_rate is expected minutes to duplicate
+Recipient.amino_acid_penalty_factor				0.08			float	
+
+# -- PREINFECTION
+pre_inf								False			bool
+pre_inf_duration						20			int
+pre_inf_freeze							True			bool
+
+# -- PHAGES
+Recipient.inf_rate						10 * 3e-11		eval	(infection rate)
+Recipient.phage_decay_rate					0.074/(24*60)		eval	(from DOI: 10.1371/journal.pbio.0040193, Table 1)
+Recipient.inf_factor_young					0.004			float	(factor to get infection rate of young cells, fitted)
+Recipient.inf_factor_antibiotic					0.3			float	(factor to get infection rate of antibiotic cells, fitted)
+Recipient.young_to_old_rate					1/(4*60)		eval	(rate for a cell to transition from young to old)
+Recipient.uninf_rate						0			float	(0)
+Recipient.num_pili						1			int	(1)
+clogging_infection						False			bool	(False, if True, number of free pili goes in infection rate)
+new_pili_on_duplication						True			bool	(True, if True, new free pili are grown when duplicating)
+plasmid_penalty_factor						0.0			float	(0.1, penalty factor to growth rate in early infection)
+Recipient.early_to_late_inf_rate				1/(3*60)		eval	(1/(3*60), per min)
+Recipient.plasmid_penalty_factor_late				0.5			float	(0.5, penalty factor to growth rate in late infection)
+
+# -- ANTIBIOTICS
+
+# - uptake
+Recipient.antibiotic_uptake_rate#AReceiver			0.015 * 1/1e9		eval	()
+Recipient.antibiotic_uptake_rate#APhage				0.025 * 1/1e9		eval	()
+Recipient.antibiotic_uptake_rate#ADonor				0 * 1/1e9		eval	()
+Donor.antibiotic_uptake_rate#ADonor				0.05 * 1/1e9		eval	()
+
+# - static death
+Recipient.antibiotic_death_rate					1 * 1e-4		eval	(1 * 1e-4)
+Donor.antibiotic_death_rate					1 * 1e-4		eval	(1 * 1e-4)
+
+# - dynamic death
+Recipient.antibiotic_death_on_duplication_prob#AReceiver	0.01			float	(0.01)
+Recipient.antibiotic_death_on_duplication_prob#APhage		0.05			float	(0.05 as in Receiver) - as in receiver
+Donor.antibiotic_death_on_duplication_prob#ADonor		0.02			float	(0.02) 
+antibiotic_birth_penalty_factor					1.0			float	(1.0)
+
+# - secondary
+antibiotic_spont_res						0			float	(0)
+antibiotic_slots						1			int	(1)
+antibiotic_threshold_slots					0			int	(0, all with > . slots taken has antibiotic death & birth rates)
+
+Recipient.antibiotic_resistant_death_rate			1 * 1e-4		eval	(1 * 1e-4)
+Donor.antibiotic_resistant_death_rate				1 * 1e-4		eval	(1 * 1e-4) -- not used
+
+Recipient.antibiotic_resistant_birth_penalty_factor		1.0			float	(1.0)
+Donor.antibiotic_resistant_birth_penalty_factor			1.0			float	(1.0)
+
+
+# --------- donor 
+# --- M13
+Donor.sec_rate_AA						850/60			eval	(as orig Donor params)
+Donor.sec_rate_G						0/60			eval	(as orig Donor params)
+Donor.P_decay_rate						0			float	(already accounted for in Receiver model)
+
+# -- GP3
+gp3_block_rate							5e5 * 10 * 3e-11	eval	(1e8 * m13 infection rate, very fast binding assumed)
+gp3_unblock_rate						1/(5*60)		eval	(1/(24*60), expected 24h)

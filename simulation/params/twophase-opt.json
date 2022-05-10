@@ -1,0 +1,77 @@
+{
+	"original_params": "params/twophase.txt",
+	"opt_output_dir": "output/twophase-opt/",
+
+	"target_file": "data/plate2_cubic_fit.csv",
+	"target_uncert_file": 0,
+
+	"unused_target_params":[
+		{"name":"init_phages","initial_value":1e7, "bounds":[1e5,5e7]},
+		{"name":"inf_rate_warm_mult","initial_value":1e4, "bounds":[1e2,1e4]},
+		{"name":"load_early_inf","initial_value":0.01, "bounds":[0.001,0.1]}
+	],
+
+	"target_params":[
+			{"name":"total_resource","initial_value":5e8, "bounds":[9e7,4e8]},
+			{"name":"percent_glu","initial_value":0.1, "bounds":[0.005,0.5]},
+			{"name":"load_lac","initial_value":0.1, "bounds":[0.001,0.1]},
+			{"name":"food_drain","initial_value":2, "bounds":[0,2]},
+			{"name":"prob_glu","initial_value":1e-4, "bounds":[1e-6,1e-4]},
+			{"name":"prob_lac","initial_value":1e-8, "bounds":[1e-9,1e-7]},
+			{"name":"death_rate","initial_value":1e-4, "bounds":[1e-5,1e-3]}
+	],
+
+	"dataset": [
+			{"sim":["Ecoli"], "empirical":["A1"],"init_params":["init_ecoli"],"init_vals":["T0"]},
+			{"sim":["Ecoli"], "empirical":["B1"],"init_params":["init_ecoli"],"init_vals":["T0"]},
+			{"sim":["Ecoli"], "empirical":["C1"],"init_params":["init_ecoli"],"init_vals":["T0"]},
+			{"sim":["Ecoli"], "empirical":["D1"],"init_params":["init_ecoli"],"init_vals":["T0"]}
+	],
+
+	"verbose":1,
+	"debug":1,
+	"console_freq": 0.2,
+	"pickle_freq":0.1,
+	"target_data_time_units":"minutes",
+	"plot":1,
+
+	"global_opt_method":"PSO",
+	"toy_problem":0,
+	"population_size":20,
+	"inertia":0.95,
+	"weight_best":1.2,
+	"weight_gbest":0.3,
+	"init_vel_percent":0.1,
+	"topology":"ring",
+
+	"max_steps": 20,
+	"max_steps_without_improvement":200,
+	"max_local_steps":1,
+	"min_loss":0,
+	"local_opt_method": "L-BFGS-B",
+	"round":-1,
+
+	"distance_logscaled":1,
+	"distance_norm":8,
+	"sim_distance_norm":"inf",
+	"log_uniform_steps":0,
+	"decay":0,
+	"decay_step":1,
+	"decay_factor":0.8,
+
+	"use_temperature":0,
+	"one_datapoint_at_a_time":0,
+	"use_dataset_weights":0,
+	"dataset_reweight":0.9,
+	"temperature":0.05,
+	"empirical_uncertainty":0,
+	"use_constriction_factor":0,
+
+	"plotting":
+	{
+		"save_fig":1,
+		"write_params_as_title":0,
+		"mpl_use":"Agg"
+	}
+
+}
