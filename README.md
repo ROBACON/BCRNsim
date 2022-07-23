@@ -46,7 +46,7 @@ This example also includes external data from experiments in the output plot.
 
 ## 4. Example Models
 
-The following models have been used in the work "A synthetic communication system uncovers self-jamming of bacteriophage transmission" by Amit Pathania, Corbin Hopper, Amir Pandi, Matthias Függer, Thomas Nowak, Manish Kushwaha.
+The following models have been used in the work "A synthetic communication system uncovers extracellular immunity that self-limits bacteriophage transmission" by Amit Pathania, Corbin Hopper, Amir Pandi, Matthias Függer, Thomas Nowak, Manish Kushwaha.
 
 
 ### 4.1. E. coli growth models
